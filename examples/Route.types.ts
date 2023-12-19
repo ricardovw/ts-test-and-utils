@@ -1,4 +1,4 @@
-import { TestType, Expect, ToEqual } from '../utils/Test.types'
+import { TestType, Expect, ToEqual } from '../test/Test.types'
 import { Uuid, ObjKeys, Filter, UnionFromObj, MaybeNestedFromUnion } from '../utils/Helpers.types'
 
 // Static
