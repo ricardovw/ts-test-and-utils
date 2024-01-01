@@ -16,6 +16,7 @@ export interface Routes {
     auth: true,
     params: {
       userId: Uuid,
+      tripId: Uuid,
     },
   },
   offers: {
@@ -69,10 +70,10 @@ type OfferParams = UnionFromObj<RoutePrivateParams['offers']>
 type AllParams = BookingParams | AccountParams | OfferParams
 
 type _TestParams_ = [
-  TestType<Expect<BookingParams, ToEqual<'userId'>>>,
+  TestType<Expect<BookingParams, ToEqual<'userId' | 'tripId'>>>,
   TestType<Expect<AccountParams, ToEqual<'userId' | 'companyId'>>>,
   TestType<Expect<OfferParams, ToEqual<'userId' | 'offerId'>>>,
-  TestType<Expect<AllParams, ToEqual<'userId' | 'companyId' | 'offerId'>>>
+  TestType<Expect<AllParams, ToEqual<'userId' | 'companyId' | 'offerId' | 'tripId'>>>
 ]
 
 const post: AllParams = 'offerId'

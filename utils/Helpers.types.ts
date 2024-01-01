@@ -16,7 +16,6 @@ Transforms an object type into a union of its keys
 */
 export type ObjKeys<Type> = { [Key in keyof Type]: Key }[keyof Type]
 
-// type _TestObjKeys_ = Expect<ToEqual<ObjKeys<{ id: number, user: string }>, 'id' | 'user'>>
 type _TestObjKeys_ = TestType<Expect<ObjKeys<{ id: number, user: string }>, ToEqual<'id' | 'user'>>>
 /*
 UNION FROM OBJ #Alias: ObjKeys

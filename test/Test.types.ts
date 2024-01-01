@@ -9,14 +9,14 @@ export type TestType<Result extends true> = Result
 export type Expect<Input, Output extends [string, unknown]> = Output[0] extends TO_EQUAL
   ? AssertEqual<Input, Output[1]>
   : Output[0] extends TO_BE
-    ? AssertBe<Input, Output[1]>
+    ? AssertToBe<Input, Output[1]>
     : Output[0] extends TO_NOT_BE
       ? AssertNotBe<Input, Output[1]>
       : false
 
 // Assert input to be type
 export type ToBe<Output> = [TO_BE, Output]
-export type AssertBe<Input, Type> = Input extends Type ? true : false
+export type AssertToBe<Input, Type> = Input extends Type ? true : false
 
 // Assert input not to be type
 export type ToNotBe<Output> = [TO_NOT_BE, Output]
