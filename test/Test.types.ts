@@ -1,24 +1,19 @@
-// Constants
-type TO_BE = 'ToBe'
-type TO_NOT_BE = 'ToNotBet'
-type TO_EQUAL = 'ToEqual'
+export type TO_BE = 'ToBe'
+export type TO_NOT_BE = 'ToNotBe'
+export type TO_EQUAL = 'ToEqual'
+type AssertionType = TO_BE | TO_NOT_BE | TO_EQUAL
 
 // Base Test Case
 export type TestType<Result extends true> = Result
 
 // Polymorphic Assertion Handler
-export type Expect<Input, Output extends [string, unknown]> = Output[0] extends TO_EQUAL
-  ? AssertEqual<Input, Output[1]>
-  : Output[0] extends TO_BE
-    ? AssertToBe<Input, Output[1]>
-    : Output[0] extends TO_NOT_BE
-      ? AssertNotBe<Input, Output[1]>
+export type Expect<Input, Assertion extends AssertionType, Expected> = Assertion extends TO_EQUAL
+  ? AssertEqual<Input, Expected>
+  : Assertion extends TO_BE
+    ? AssertToBe<Input, Expected>
+    : Assertion extends TO_NOT_BE
+      ? AssertNotBe<Input, Expected>
       : false
-
-// Declarative Wrappers
-export type ToBe<Output> = [TO_BE, Output]
-export type ToNotBe<Output> = [TO_NOT_BE, Output]
-export type ToEqual<Output> = [TO_EQUAL, Output]
 
 // Assert input to be type
 export type AssertToBe<Input, Type> = Input extends Type ? true : false
