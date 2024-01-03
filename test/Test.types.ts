@@ -1,10 +1,15 @@
 export type TO_BE = 'ToBe'
 export type TO_NOT_BE = 'ToNotBe'
 export type TO_EQUAL = 'ToEqual'
+
+export type ToBe = TO_BE
+export type ToNotBe = TO_NOT_BE
+export type ToEqual = TO_EQUAL
+
 type AssertionType = TO_BE | TO_NOT_BE | TO_EQUAL
 
 // Base Test Case
-export type TestType<Result extends true> = Result
+export type Test<Result extends true> = Result
 
 // Polymorphic Assertion Handler
 export type Expect<Input, Assertion extends AssertionType, Expected> = Assertion extends TO_EQUAL
