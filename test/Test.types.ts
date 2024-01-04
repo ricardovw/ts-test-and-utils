@@ -9,10 +9,10 @@ export type ToEqual = TO_EQUAL
 type AssertionType = TO_BE | TO_NOT_BE | TO_EQUAL
 
 // Base Test Case
-export type Test<Result extends true> = Result
+export type Expect<Result extends true> = Result
 
 // Polymorphic Assertion Handler
-export type Expect<Input, Assertion extends AssertionType, Expected> = Assertion extends TO_EQUAL
+export type TypeOf<Input, Assertion extends AssertionType, Expected> = Assertion extends TO_EQUAL
   ? AssertEqual<Input, Expected>
   : Assertion extends TO_BE
     ? AssertToBe<Input, Expected>

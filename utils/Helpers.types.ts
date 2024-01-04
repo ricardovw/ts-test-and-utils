@@ -1,4 +1,4 @@
-import { Test, Expect, ToBe, ToNotBe, ToEqual} from '../test/Test.types'
+import { Expect, TypeOf, ToBe, ToNotBe, ToEqual} from '../test/Test.types'
 /*
 UUID
 ---
@@ -6,9 +6,9 @@ Enforces a string that matches the pattern of a Uuid
 */
 export type Uuid = `${string}-${string}-${string}-${string}-${string}`
 
-type _TestUuidValid_ = Test<Expect<'806a76bf-b43d-4567-9ef9-b06c042ce461', ToBe, Uuid>>
-type _TestUuidInvalid_ = Test<Expect<'806a76bf-4567-9ef9-b06c042ce461', ToNotBe, Uuid>>
-type _TestUuidInvalidTwo_ = Test<Expect<'test-uuid-invalid', ToNotBe, Uuid>>
+type _TestUuidValid_ = Expect<TypeOf<'806a76bf-b43d-4567-9ef9-b06c042ce461', ToBe, Uuid>>
+type _TestUuidInvalid_ = Expect<TypeOf<'806a76bf-4567-9ef9-b06c042ce461', ToNotBe, Uuid>>
+type _TestUuidInvalidTwo_ = Expect<TypeOf<'test-uuid-invalid', ToNotBe, Uuid>>
 /*
 OBJ KEYS
 ---
@@ -16,7 +16,7 @@ Transforms an object type into a union of its keys
 */
 export type ObjKeys<Type> = { [Key in keyof Type]: Key }[keyof Type]
 
-type _TestObjKeys_ = Test<Expect<ObjKeys<{ id: number, user: string }>, ToEqual, "id" | "user">>
+type _TestObjKeys_ = Expect<TypeOf<ObjKeys<{ id: number, user: string }>, ToEqual, "id" | "user">>
 /*
 UNION FROM OBJ #Alias: ObjKeys
 ---
@@ -24,7 +24,7 @@ Transforms an object type into a union of its keys
 */
 export type UnionFromObj<Type> = ObjKeys<Type>
 
-type _TestUnionFromObj_ = Test<Expect<UnionFromObj<{ id: number, user: string }>, ToEqual, 'id' | 'user'>>
+type _TestUnionFromObj_ = Expect<TypeOf<UnionFromObj<{ id: number, user: string }>, ToEqual, 'id' | 'user'>>
 /*
 OBJ FROM UNION
 ---
@@ -34,8 +34,8 @@ Transforms a Union type into a keyed Object type with optional value
 */
 export type ObjFromUnion<Type extends string, Value = unknown> = Record<Type, Value>
 
-type _TestObjFromUnion_ = Test<Expect<ObjFromUnion<'id' | 'user'>, ToEqual, { id: unknown, user: unknown}>>
-type _TestObjFromUnionWithValue_ = Test<Expect<ObjFromUnion<'id' | 'user', 'test'>, ToEqual, { id: 'test', user: 'test'}>>
+type _TestObjFromUnion_ = Expect<TypeOf<ObjFromUnion<'id' | 'user'>, ToEqual, { id: unknown, user: unknown}>>
+type _TestObjFromUnionWithValue_ = Expect<TypeOf<ObjFromUnion<'id' | 'user', 'test'>, ToEqual, { id: 'test', user: 'test'}>>
 /*
 FILTER
 ---
@@ -47,8 +47,8 @@ export type Filter<Type, Pattern, Value = void> = {
     : Type[Key]
 }
 
-type _TestFilter_ = Test<
-  Expect<
+type _TestFilter_ = Expect<
+  TypeOf<
     Filter<
       // @Type
       { flights: { auth: false }, account: { auth: true } },
@@ -61,8 +61,8 @@ type _TestFilter_ = Test<
   >
 >
 
-type _TestFilterWithValue_ = Test<
-  Expect<
+type _TestFilterWithValue_ = Expect<
+  TypeOf<
     Filter<
       // @Type
       { flights: { auth: false }, account: { auth: true } },
@@ -91,8 +91,8 @@ export type MaybeNestedFromUnion<Union extends string, Obj, NestedKey extends st
     : never
 }
 
-type _TestMaybeNestedFromUnion_ = Test<
-  Expect<
+type _TestMaybeNestedFromUnion_ = Expect<
+  TypeOf<
     MaybeNestedFromUnion<
       // @Union
       'flights' | 'bookings',
@@ -110,8 +110,8 @@ type _TestMaybeNestedFromUnion_ = Test<
   >
 >
 
-type _TestMaybeNestedFromUnionWithUnionPartialSelection_ = Test<
-  Expect<
+type _TestMaybeNestedFromUnionWithUnionPartialSelection_ = Expect<
+  TypeOf<
     UnionFromObj<
       MaybeNestedFromUnion<
         // @Union
