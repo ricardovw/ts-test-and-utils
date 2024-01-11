@@ -77,6 +77,26 @@ type _TestFilterWithValue_ = Expect<
   >
 >
 /*
+ONLY MATCHED KEYS
+---
+Takes a union of keys and only returns the ones that match the pattern provided.
+*/
+export type OnlyMatchedKeys<Key, Pattern> = Key extends Pattern ? Key : never
+
+type _TestOnlyMatchedKeys_ = Expect<
+  TypeOf<
+    OnlyMatchedKeys<
+    // @Type
+    'hero' | 'h1' | 'p' | 'mega',
+    // @Pattern
+    `h${string}`
+    >,
+    ToEqual,
+    // Returns
+    'hero' | 'h1'
+  >
+>
+/*
 MAYBE NESTED FROM UNION
 ---
 Returns an object with the intersection of a Union key and an irregular object that may contain a nested key.
