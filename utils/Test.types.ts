@@ -20,6 +20,8 @@ export type TypeOf<Input, Assertion extends AssertionType, Expected> = Assertion
       ? AssertNotBe<Input, Expected>
       : false
 
+export type TS<I, A extends AssertionType, E> = TypeOf<I, A, E>
+
 // Assert input to be type
 export type AssertToBe<Input, Type> = Input extends Type ? true : false
 // Assert input not to be type
