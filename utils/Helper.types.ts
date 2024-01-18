@@ -1,4 +1,4 @@
-import { Expect, TypeOf, ToBe, ToNotBe, ToEqual} from '../test/Test.types'
+import { Expect, TypeOf, ToBe, ToNotBe, ToEqual} from './Test.types'
 /*
 UUID
 ---

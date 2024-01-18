@@ -1,5 +1,5 @@
-import { Expect, TypeOf, ToEqual } from '../test/Test.types'
-import { Uuid, ObjKeys, Filter, UnionFromObj, MaybeNestedFromUnion } from '../utils/Helpers.types'
+import { Expect, TypeOf, ToEqual } from '../utils/Test.types'
+import { Uuid, ObjKeys, Filter, UnionFromObj, MaybeNestedFromUnion } from '../utils/Helper.types'
 
 // Static
 export interface Routes {
