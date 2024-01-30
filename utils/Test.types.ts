@@ -20,6 +20,7 @@ export type TypeOf<Input, Assertion extends AssertionType, Expected> = Assertion
       ? AssertNotBe<Input, Expected>
       : false
 
+// Semantic Alias for @TypeOf
 export type TS<I, A extends AssertionType, E> = TypeOf<I, A, E>
 
 // Assert input to be type
