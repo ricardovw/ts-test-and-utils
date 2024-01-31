@@ -5,7 +5,7 @@ declare const brand: unique symbol;
 export type Brand<T, TBrand> = T & { [brand]: TBrand };
 
 type _Branded_ = Brand<string, 'Branded'>
-const branded: _Branded_ = 'example123' as _Branded_
+const branded = 'example123' as _Branded_
 type _TestBrand_ = Expect<TS<typeof branded, ToBe, _Branded_>>
 
 ///////////////////
@@ -47,24 +47,25 @@ const stateExample = () => {
   const onSubmitHandler = (values: PasswordValues) => {
 
     // TypeGuard Example
-    // const isValidPassword = (values: PasswordValues) => {
-    const isValidPassword = (values: PasswordValues): values is Valid<PasswordValues> => {
+    const isValidPassword = (values: PasswordValues) => {
+    // const isValidPassword = (values: PasswordValues): values is Valid<PasswordValues> => {
       return values.password === values.confirmPassword
     };
 
     if (isValidPassword(values)) createUserOnApi(values)
 
     // Assertion Function Example
-    // function assertIsValidPassword(values: PasswordValues) {
-    function assertIsValidPassword(values: PasswordValues): asserts values is Valid<PasswordValues> {
+    function assertIsValidPassword(values: PasswordValues) {
+    // function assertIsValidPassword(values: PasswordValues): asserts values is Valid<PasswordValues> {
       if (values.password !== values.confirmPassword) {
         throw new Error("Password is invalid");
       }
     }
     
-    assertIsValidPassword(values);
+    assertIsValidPassword(values)
     createUserOnApi(values)
   }
 
-  onSubmitHandler({ password: 'Test123', confirmPassword: 'Test123' })
+  // onSubmitHandler({ password: 'Test123', confirmPassword: 'Test123' })
+  onSubmitHandler({})
 }
