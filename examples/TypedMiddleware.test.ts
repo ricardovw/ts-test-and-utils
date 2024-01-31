@@ -1,5 +1,6 @@
 import { test, expect } from 'vitest'
-import { config, DynamicMiddleware, fetchUser } from '../utils/Builder.types'
+import { config, DynamicMiddleware, fetchUser, FetchedUser } from '../utils/Builder.types'
+import { Expect, TS, ToBe } from '../utils/Test.types'
 
 const middleware = new DynamicMiddleware((req: Request) => {
   return {
@@ -27,15 +28,26 @@ const middleware = new DynamicMiddleware((req: Request) => {
 });
 
 test("Should throw error if isLoggedIn is falsy", () => {
-expect(middleware.run({ url: "/user/123" } as Request)).rejects.toThrow()
+  expect(middleware.run({ url: "/user/123" } as Request)).rejects.toThrow()
 });
 
 test("Should build response correctly", async () => {
-const result = await middleware.run({ url: `/user/${config.username}` } as Request)
+  const {
+    username,
+    isLoggedIn,
+    user,
+  } = await middleware.run({ url: `/user/${config.username}` } as Request)
 
-expect(result.username).toBe(config.username)
-expect(result.isLoggedIn).toBe(true)
-expect(result.user.url).toBe(`/user/${config.username}`)
-expect(result.user.firstName).toBe(config.firstName)
-expect(result.user.lastName).toBe(config.lastName)
+  expect(username).toBe(config.username)
+  type _TestUsername_ = Expect<TS<typeof username, ToBe, string>>
+  
+  expect(isLoggedIn).toBe(true)
+  type _TestIsLoggedIn_ = Expect<TS<typeof isLoggedIn, ToBe, Boolean>>
+  
+  expect(user.url).toBe(`/user/${config.username}`)
+  expect(user.firstName).toBe(config.firstName)
+  expect(user.lastName).toBe(config.lastName)
+  expect(user.age).toBeTruthy()
+
+  type _TestUser_ = Expect<TS<typeof user, ToBe, FetchedUser>>
 });

@@ -5,11 +5,18 @@ export const config = {
 }
 
 // Fake external lib
+export type FetchedUser = {
+  url: string,
+  firstName: string,
+  lastName: string,
+  age: number
+}
 export const fetchUser = async (url: string) => {
   return {
     url,
     firstName: config.firstName,
     lastName: config.lastName,
+    age: Math.floor(Math.random() * 100)
   }
 }
 // Middleware through Builder Pattern
