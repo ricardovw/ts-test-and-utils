@@ -1,4 +1,4 @@
-import { Expect, TypeOf, ToBe, ToNotBe, ToEqual} from './Test.types'
+import { Expect, TypeOf, TS, ToBe, ToNotBe, ToEqual} from './Test.types'
 /*
 UUID
 ---
@@ -148,3 +148,15 @@ type _TestMaybeNestedFromUnionWithUnionPartialSelection_ = Expect<
       'userId' | 'companyId'
   >
 >
+/*
+BRAND
+---
+Brands a type with the intersection of a generic type and a unique global symbol.
+- requires casting
+*/
+declare const brand: unique symbol
+export type Brand<T, TBrand> = T & { [brand]: TBrand }
+
+type _Branded_ = Brand<string, 'Branded'>
+const branded = 'example123' as _Branded_
+type _TestBrand_ = Expect<TS<typeof branded, ToBe, _Branded_>>

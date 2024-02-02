@@ -1,4 +1,4 @@
-import type { Brand } from '../utils/Branded.types'
+import type { Brand } from '../utils/Helper.types'
 
 type Valid<T> = Brand<T, "Valid">;
 
@@ -15,7 +15,7 @@ const onSubmitHandler = (values: PasswordValues) => {
   // const isValidPassword = (values: PasswordValues) => {
   const isValidPassword = (values: PasswordValues): values is Valid<PasswordValues> => {
     return values.password === values.confirmPassword
-  };
+  }
 
   if (isValidPassword(values)) createUserOnApi(values)
 
