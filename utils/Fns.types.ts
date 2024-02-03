@@ -15,3 +15,17 @@ TS is smart enough to identify this as a runtime type helper and it actually exc
 */
 
 export const asConst = <const T>(t: T) => t;
+/*
+MAKE CONFIG
+---
+Type helper function that helps TS infer values within the same data structure. 
+*/
+
+export interface InferRouteGetters<Route extends string> {
+  routes: Route[];
+  getters: {
+    [K in Route]?: () => void;
+  };
+}
+
+export const configRouteAndGetters = <Route extends string>(config: InferRouteGetters<Route>) => config
