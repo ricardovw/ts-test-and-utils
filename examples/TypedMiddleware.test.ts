@@ -1,6 +1,15 @@
 import { test, expect } from 'vitest'
-import { config, DynamicMiddleware, fetchUser, FetchedUser } from '../utils/Builder.types'
+import { DynamicMiddleware } from '../utils/Builder.types'
+import { fetchUser, FetchedUser, setCtx } from '../mocks/fetchUser.fake'
 import { Expect, TS, ToBe } from '../utils/Test.types'
+
+export const config = {
+  username: 'benitoj',
+  firstName: 'Benito',
+  lastName: 'Juarez',
+}
+
+setCtx(config)
 
 const middleware = new DynamicMiddleware((req: Request) => {
   return {
