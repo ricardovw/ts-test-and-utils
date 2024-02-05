@@ -29,3 +29,10 @@ export interface InferRouteGetters<Route extends string> {
 }
 
 export const configRouteAndGetters = <Route extends string>(config: InferRouteGetters<Route>) => config
+/*
+NAME REVERSE MAP
+---
+Type helper function that helps TS pass the key of an obj into a name arg of a nested fn. 
+*/
+
+export const nameReverseMap = <T>(obj: { [K in keyof T]: (name: K) => void }) => obj

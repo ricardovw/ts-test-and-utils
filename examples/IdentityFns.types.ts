@@ -1,5 +1,5 @@
 import { Expect, TypeOf, TS, ToBe, ToNotBe, ToEqual} from '../utils/Test.types'
-import { asConst, configRouteAndGetters, InferRouteGetters } from '../utils/Fns.types'
+import { asConst, configRouteAndGetters, InferRouteGetters, nameReverseMap } from '../utils/Fns.types'
 
 // AS CONST
 const _asConst_ = asConst([
@@ -40,11 +40,7 @@ type _TestRouteGettersTwo_ = Expect<TS<typeof _routeGettersTwo_, ToBe, InferRout
 
 // EVENT HANDLER REVERSE MAP
 
-const makeEventHandlers = <T>(obj: {
-  [K in keyof T]: (name: K) => void;
-}) => obj
-
-const handlers = makeEventHandlers({
+const handlers = nameReverseMap({
   click: (name) => {
     type _TestMakeEventHandlersClick_ = Expect<TS<typeof name, ToBe, 'click'>>
   },
