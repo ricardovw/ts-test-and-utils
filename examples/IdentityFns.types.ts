@@ -37,3 +37,19 @@ const _routeGettersTwo_ = configRouteAndGetters({
 });
 
 type _TestRouteGettersTwo_ = Expect<TS<typeof _routeGettersTwo_, ToBe, InferRouteGetters<'/my/account' | '/my/flights'>>>
+
+// EVENT HANDLER REVERSE MAP
+
+const makeEventHandlers = <T>(obj: {
+  [K in keyof T]: (name: K) => void;
+}) => obj
+
+const handlers = makeEventHandlers({
+  click: (name) => {
+    type _TestMakeEventHandlersClick_ = Expect<TS<typeof name, ToBe, 'click'>>
+  },
+  focus: (name) => {
+    type _TestMakeEventHandlersFocus_ = Expect<TS<typeof name, ToBe, 'focus'>>
+  },
+});
+

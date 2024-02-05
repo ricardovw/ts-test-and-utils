@@ -16,7 +16,7 @@ TS is smart enough to identify this as a runtime type helper and it actually exc
 
 export const asConst = <const T>(t: T) => t;
 /*
-MAKE CONFIG
+CONFIG ROUTE AND GETTERS
 ---
 Type helper function that helps TS infer values within the same data structure. 
 */

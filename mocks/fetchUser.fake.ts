@@ -6,14 +6,13 @@ export type FetchedUser = {
   age: number
 }
 
-let user: { firstName: string, lastName: string } | FetchedUser
+let user: { firstName: string, lastName: string }
 export const setCtx = (ctx: typeof user) => user = ctx
 
 export const fetchUser = async (url: string) => {
   return {
     url,
-    firstName: user.firstName,
-    lastName: user.lastName,
-    age: Math.floor(Math.random() * 100)
+    age: Math.floor(Math.random() * 100),
+    ...user,
   }
 }
